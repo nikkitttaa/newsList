@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          Expanded(child: const NewsTile())
+          const Expanded(child: NewsTile())
         ],
       )),
     );

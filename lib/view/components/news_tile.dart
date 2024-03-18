@@ -58,11 +58,11 @@ class NewsTile extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: SizedBox(
-                                    width: 250,
+                                    width: 230,
                                     child: Text(
                                       snapshot.data!.newsName,
                                       style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
@@ -77,7 +77,7 @@ class NewsTile extends StatelessWidget {
                                     child: Text(
                                       snapshot.data!.newsDescription,
                                       style: const TextStyle(
-                                          fontSize: 18, color: Colors.grey),
+                                          fontSize: 16, color: Colors.grey),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       softWrap: true,
