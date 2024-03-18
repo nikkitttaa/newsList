@@ -22,11 +22,16 @@ class FullNewsScreen extends StatelessWidget {
         body: FutureBuilder<NewsModel>(
             future: fetchData(),
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+              if (snapshot.connectionState == ConnectionState.waiting) 
+              {
                 return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
+              } 
+              else if (snapshot.hasError) 
+              {
                 return const Center(child: Text('Ошибка при загрузке данных'));
-              } else {
+              } 
+              else 
+              {
                 return SafeArea(
                   child: SingleChildScrollView(
                     child: Column(children: [
@@ -40,15 +45,15 @@ class FullNewsScreen extends StatelessWidget {
                               child: Image.asset(
                                 snapshot.data!.imagePath,
                                 fit: BoxFit.cover,
-                              )),
+                              ),
+                            ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10,),
                         child: Text(
                           snapshot.data!.newsName,
-                          style: const TextStyle(fontSize: 24),
+                          style: const TextStyle(fontSize: 24,),
                         ),
                       ),
 
@@ -56,16 +61,14 @@ class FullNewsScreen extends StatelessWidget {
                         width: 380,
                         height: 1,
                         decoration: const BoxDecoration(
-                            color: Color.fromARGB(196, 196, 196, 196)),
+                          color: Color.fromARGB(196, 196, 196, 196),),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Text(
                           snapshot.data!.newsDescription,
-                          style:
-                              const TextStyle(fontSize: 16, color: Colors.grey),
+                          style: const TextStyle(fontSize: 16, color: Colors.grey,),
                         ),
                       ),
 
@@ -112,10 +115,13 @@ class FullNewsScreen extends StatelessWidget {
                           ),
                         ),
                       )
-                    ]),
+                    ]
                   ),
-                );
-              }
-            }));
+                ),
+              );
+            }
+          }
+        )
+      );
   }
 }

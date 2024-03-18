@@ -8,23 +8,26 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          //txt
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.sizeOf(context).width * 0.35,
-                vertical: 10),
-            child: const Text(
-              'Все новости',
-              style: TextStyle(fontSize: 20),
-              textAlign: TextAlign.center,
-            ),
-          ),
+        child: Column(
+          children: [
 
-          const Expanded(child: NewsTile())
-        ],
-      )),
+            //txt
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.sizeOf(context).width * 0.35,
+                  vertical: 10),
+              child: const Text(
+                'Все новости',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
+
+            //list
+            const Expanded(child: NewsTile())
+          ],
+        )
+      ),
     );
   }
 }
