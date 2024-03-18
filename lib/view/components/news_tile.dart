@@ -34,7 +34,7 @@ class NewsTile extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FullNewsScreen()));
+                            builder: (context) => const FullNewsScreen(),),);
                   },
                   child: Container(
                     padding:
@@ -42,7 +42,10 @@ class NewsTile extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(snapshot.data!.imagePath, scale: 0.8),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Image.asset(snapshot.data!.imagePath, scale: 0.8),
+                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -61,7 +64,7 @@ class NewsTile extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5, top: 4),
                               child: SizedBox(
                                 width: 250,
                                 child: Text(

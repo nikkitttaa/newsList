@@ -51,6 +51,13 @@ class FullNewsScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 24),
                         ),
                       ),
+
+                      Container(
+                        width: 380,
+                        height: 1,
+                        decoration: const BoxDecoration(color: Colors.grey),
+                      ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
