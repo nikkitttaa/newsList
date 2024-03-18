@@ -29,62 +29,68 @@ class NewsTile extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return const Center(child: Text('Ошибка при загрузке данных'));
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FullNewsScreen(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child:
-                              Image.asset(snapshot.data!.imagePath, scale: 0.8),
-                        ),
-                        Column(
+                return ListView.builder(
+                  itemCount: 12,
+                  itemBuilder: ((context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FullNewsScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 16),
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: SizedBox(
-                                width: 250,
-                                child: Text(
-                                  snapshot.data!.newsName,
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Image.asset(snapshot.data!.imagePath,
+                                  scale: 0.8),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5, top: 4),
-                              child: SizedBox(
-                                width: 250,
-                                child: Text(
-                                  snapshot.data!.newsDescription,
-                                  style: const TextStyle(
-                                      fontSize: 18, color: Colors.grey),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  softWrap: true,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: 250,
+                                    child: Text(
+                                      snapshot.data!.newsName,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, top: 4),
+                                  child: SizedBox(
+                                    width: 250,
+                                    child: Text(
+                                      snapshot.data!.newsDescription,
+                                      style: const TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                )
+                              ],
                             )
                           ],
-                        )
-                      ],
-                    ),
-                  ),
+                        ),
+                      ),
+                    );
+                  }),
                 );
               }
             }));

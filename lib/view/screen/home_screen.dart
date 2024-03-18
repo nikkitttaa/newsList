@@ -22,8 +22,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          //newsList
-          const SizedBox(height: 200, child: NewsTile())
+          Expanded(child: const NewsTile())
         ],
       )),
     );
