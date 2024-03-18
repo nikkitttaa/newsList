@@ -73,7 +73,7 @@ class FullNewsScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
+                          padding: const EdgeInsets.only(top: 16, left: 24,),
                           child: Container(
                             height: 40,
                             width: 236,

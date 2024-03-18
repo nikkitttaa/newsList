@@ -49,8 +49,11 @@ class NewsTile extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Image.asset(snapshot.data!.imagePath,
-                                  scale: 0.8),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(7),
+                                child: Image.asset(snapshot.data!.imagePath,
+                                    scale: 0.9),
+                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,8 +65,7 @@ class NewsTile extends StatelessWidget {
                                     child: Text(
                                       snapshot.data!.newsName,
                                       style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontSize: 18,),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                     ),
