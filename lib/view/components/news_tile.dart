@@ -32,9 +32,11 @@ class NewsTile extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const FullNewsScreen(),),);
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FullNewsScreen(),
+                      ),
+                    );
                   },
                   child: Container(
                     padding:
@@ -44,7 +46,8 @@ class NewsTile extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 8),
-                          child: Image.asset(snapshot.data!.imagePath, scale: 0.8),
+                          child:
+                              Image.asset(snapshot.data!.imagePath, scale: 0.8),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

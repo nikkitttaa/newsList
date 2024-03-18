@@ -55,7 +55,8 @@ class FullNewsScreen extends StatelessWidget {
                       Container(
                         width: 380,
                         height: 1,
-                        decoration: const BoxDecoration(color: Colors.grey),
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(196, 196, 196, 196)),
                       ),
 
                       Padding(
@@ -70,7 +71,7 @@ class FullNewsScreen extends StatelessWidget {
 
                       //кнопка перейти в источник
                       Padding(
-                        padding: const EdgeInsets.only(right: 130),
+                        padding: const EdgeInsets.only(right: 130, top: 15),
                         child: Container(
                           height: 40,
                           width: 236,
