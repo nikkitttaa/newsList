@@ -14,7 +14,8 @@ class NewsTile extends StatelessWidget {
             newsName:
                 'Здоровый образ жизни: советы и инструменты по питанию и упражнениям для достижения успеха',
             imagePath: 'assets/images/topic_image.png',
-            newsDescription: 'desc'));
+            newsDescription:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec venenatis lectus, et dapibus eros. Praesent id magna quis purus pharetra scelerisque ut quis felis. Duis dictum efficitur purus et blandit. Duis vel consequat dui. Nullam euismod, nisl eu fermentum convallis, arcu lectus sagittis ipsum, in elementum tortor purus vitae ligula. Mauris at enim elementum, laoreet metus sit amet, cursus orci. Sed nec elit libero. In accumsan mi non sollicitudin tincidunt. Proin molestie orci id pulvinar placerat.'));
   }
 
   @override
@@ -36,7 +37,8 @@ class NewsTile extends StatelessWidget {
                             builder: (context) => const FullNewsScreen()));
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -46,22 +48,30 @@ class NewsTile extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                snapshot.data!.newsName,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                              child: SizedBox(
+                                width: 250,
+                                child: Text(
+                                  snapshot.data!.newsName,
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                snapshot.data!.newsDescription,
-                                style: const TextStyle(fontSize: 18),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                softWrap: true,
+                              child: SizedBox(
+                                width: 250,
+                                child: Text(
+                                  snapshot.data!.newsDescription,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  softWrap: true,
+                                ),
                               ),
                             )
                           ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:new_webant/view/components/news_tile.dart';
-import 'package:new_webant/model/news_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           ),
 
           //newsList
-          SizedBox(height: 200, child: NewsTile())
+          const SizedBox(height: 200, child: NewsTile())
         ],
       )),
     );
