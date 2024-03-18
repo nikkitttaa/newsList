@@ -6,7 +6,7 @@ class FullNewsScreen extends StatelessWidget {
 
   Future<NewsModel> fetchData() {
     return Future.delayed(
-        const Duration(seconds: 2),
+        const Duration(),
         () => NewsModel(
             newsName:
                 'Здоровый образ жизни: советы и инструменты по питанию и упражнениям для достижения успеха',
@@ -70,42 +70,45 @@ class FullNewsScreen extends StatelessWidget {
                       ),
 
                       //кнопка перейти в источник
-                      Padding(
-                        padding: const EdgeInsets.only(right: 130, top: 15),
-                        child: Container(
-                          height: 40,
-                          width: 236,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Image.asset(
-                                  'assets/images/vector.png',
-                                  color: Colors.black,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
+                          child: Container(
+                            height: 40,
+                            width: 236,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 5,
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
                                 ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 20),
-                                child: Text(
-                                  'Перейти в источник',
-                                  style: TextStyle(
-                                    fontSize: 16,
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 19,),
+                                  child: Image.asset(
+                                    'assets/images/vector.png',
+                                    color: Colors.black,
                                   ),
                                 ),
-                              )
-                            ],
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 16),
+                                  child: Text(
+                                    'Перейти в источник',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       )

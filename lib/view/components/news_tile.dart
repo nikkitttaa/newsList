@@ -9,7 +9,7 @@ class NewsTile extends StatelessWidget {
 
   Future<NewsModel> fetchData() {
     return Future.delayed(
-        const Duration(seconds: 2),
+        const Duration(),
         () => NewsModel(
             newsName:
                 'Здоровый образ жизни: советы и инструменты по питанию и упражнениям для достижения успеха',
