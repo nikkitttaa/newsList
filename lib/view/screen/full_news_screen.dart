@@ -2,28 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:new_webant/model/news_model.dart';
 
 class FullNewsScreen extends StatelessWidget {
-  const FullNewsScreen(
-      {super.key,
-      required this.imageUrl,
-      required this.title,
-      required this.summary});
+  const FullNewsScreen({super.key, required this.id});
 
-  final String imageUrl;
-  final String title;
-  final String summary;
-
+  final int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: FutureBuilder<List<News>>(
-          future: News.fetchNews(),
+      body: FutureBuilder<News>(
+          future: News.fetchNewsById(id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return const Center(child: Text('Ошибка при загрузке данных'));
             } else {
+              final News news = snapshot.data!;
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Column(children: [
@@ -35,7 +29,7 @@ class FullNewsScreen extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.network(
-                            imageUrl,
+                            news.imageUrl,
                             fit: BoxFit.cover,
                             errorBuilder: (context, url, error) => const Icon(
                               Icons.error,
@@ -52,7 +46,7 @@ class FullNewsScreen extends StatelessWidget {
                         vertical: 10,
                       ),
                       child: Text(
-                        title,
+                        news.title,
                         style: const TextStyle(
                           fontSize: 24,
                         ),
@@ -71,7 +65,7 @@ class FullNewsScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       child: Text(
-                        summary,
+                        news.summary,
                         style: const TextStyle(
                           fontSize: 16,
                           color: Colors.grey,

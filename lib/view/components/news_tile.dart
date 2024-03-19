@@ -29,9 +29,8 @@ class NewsTile extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => FullNewsScreen(
-                                imageUrl: news.imageUrl,
-                                title: news.title,
-                                summary: news.summary)));
+                                  id: news.id,
+                                )));
                   },
                   child: Container(
                     padding:
