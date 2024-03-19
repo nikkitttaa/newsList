@@ -12,11 +12,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             //txt
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.sizeOf(context).width * 0.35,
-                  vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.35, vertical: 10),
               child: const Text(
-                'Все новости',
+                "Все новости",
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),

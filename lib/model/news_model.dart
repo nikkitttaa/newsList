@@ -34,9 +34,9 @@ class News {
     if (response.statusCode == 200) {
       final responseList = json.decode(response.body)['results'] as List<dynamic>;
 
-      final function = (response) {
+      function(response) {
         return News.fromJson(response as Map<String, dynamic>);
-      };
+      }
 
       return responseList.map(function).toList();
     } else {

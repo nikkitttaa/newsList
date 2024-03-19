@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:new_webant/model/news_model.dart';
+import 'package:new_webant/view/components/link_to_source_button.dart';
 
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
 
   final int id;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: FutureBuilder<News>(
-          future: News.fetchNewsById(id),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return const Center(child: Text('Ошибка при загрузке данных'));
-            } else {
-              final News news = snapshot.data!;
-              return SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(children: [
+        future: News.fetchNewsById(id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Ошибка при загрузки данных'));
+          } else {
+            final News news = snapshot.data!;
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SizedBox(
@@ -52,7 +55,6 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     Container(
                       width: 380,
                       height: 1,
@@ -60,10 +62,8 @@ class FullNewsScreen extends StatelessWidget {
                         color: Color.fromARGB(196, 196, 196, 196),
                       ),
                     ),
-
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: Text(
                         news.summary,
                         style: const TextStyle(
@@ -72,60 +72,16 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    //кнопка перейти в источник
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 16,
-                          left: 24,
-                        ),
-                        child: Container(
-                          height: 40,
-                          width: 236,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 5,
-                                blurRadius: 10,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 19,
-                                ),
-                                child: Image.asset(
-                                  'assets/images/vector.png',
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Text(
-                                  'Перейти в источник',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ]),
+                    LinkToSourceButton(
+                      url: news.siteUrl,
+                    ),
+                  ],
                 ),
-              );
-            }
-          }),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
