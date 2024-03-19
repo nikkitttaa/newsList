@@ -33,8 +33,7 @@ class NewsTile extends StatelessWidget {
                                 )));
                   },
                   child: Container(
-                    padding:
-                        const EdgeInsets.only(left: 32, right: 32, bottom: 16),
+                    padding: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -47,15 +46,15 @@ class NewsTile extends StatelessWidget {
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6)),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(6),
                                   child: Image.network(
                                     news.imageUrl,
                                     fit: BoxFit.cover,
                                     scale: 1,
-                                    errorBuilder: (context, url, error) =>
-                                        const Icon(
+                                    errorBuilder: (context, url, error) => const Icon(
                                       Icons.error,
                                       color: Colors.red,
                                       size: 50,
@@ -82,14 +81,15 @@ class NewsTile extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, top: 4),
+                                  padding: const EdgeInsets.only(left: 5, top: 4),
                                   child: SizedBox(
                                     width: 250,
                                     child: Text(
                                       news.summary,
                                       style: const TextStyle(
-                                          fontSize: 16, color: Colors.grey),
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       softWrap: true,
@@ -107,11 +107,11 @@ class NewsTile extends StatelessWidget {
               },
             );
           }
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

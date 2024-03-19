@@ -29,37 +29,30 @@ class News {
   }
 
   static Future<List<News>> fetchNews() async {
-    var url =
-        'https://api.spaceflightnewsapi.net/v4/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a';
+    var url = 'https://api.spaceflightnewsapi.net/v4/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      final responseList =
-          json.decode(response.body)['results'] as List<dynamic>;
+      final responseList = json.decode(response.body)['results'] as List<dynamic>;
 
-      return responseList
-          .map((e) => News.fromJson(e as Map<String, dynamic>))
-          .toList();
+      final function = (response) {
+        return News.fromJson(response as Map<String, dynamic>);
+      };
+
+      return responseList.map(function).toList();
     } else {
       throw Exception('Error');
     }
   }
 
   static Future<News> fetchNewsById(int id) async {
-    var url =
-        'https://api.spaceflightnewsapi.net/v4/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a';
+    var url = 'https://api.spaceflightnewsapi.net/v4/articles/$id/';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      final responseList =
-          json.decode(response.body)['results'] as List<dynamic>;
+      final responseList = json.decode(response.body) as Map<String, dynamic>;
 
-      var news = responseList
-          .map((e) => News.fromJson(e as Map<String, dynamic>))
-          .toList();
+      var news = News.fromJson(responseList);
 
-      News selectedNews =
-          news.where((element) => element.id == id).toList().first;
-
-      return selectedNews;
+      return news;
     } else {
       throw Exception('Error');
     }
