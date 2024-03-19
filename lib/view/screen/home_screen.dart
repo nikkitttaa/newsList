@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
             //txt
             Padding(
               padding: EdgeInsets.symmetric(
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             //list
             const Expanded(child: NewsTile())
           ],
-        )
+        ),
       ),
     );
   }

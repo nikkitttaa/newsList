@@ -1,58 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:new_webant/view/screen/full_news_screen.dart';
 import 'package:new_webant/model/news_model.dart';
+import 'package:new_webant/view/screen/full_news_screen.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({
     Key? key,
   }) : super(key: key);
 
-  Future<NewsModel> fetchData() {
-    return Future.delayed(
-        const Duration(),
-        () => NewsModel(
-            newsName:
-                'Здоровый образ жизни: советы и инструменты по питанию и упражнениям для достижения успеха',
-            imagePath: 'assets/images/topic_image.png',
-            newsDescription:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec venenatis lectus, et dapibus eros. Praesent id magna quis purus pharetra scelerisque ut quis felis. Duis dictum efficitur purus et blandit. Duis vel consequat dui. Nullam euismod, nisl eu fermentum convallis, arcu lectus sagittis ipsum, in elementum tortor purus vitae ligula. Mauris at enim elementum, laoreet metus sit amet, cursus orci. Sed nec elit libero. In accumsan mi non sollicitudin tincidunt. Proin molestie orci id pulvinar placerat.'));
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder<NewsModel>(
-            future: fetchData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const Center(child: Text('Ошибка при загрузке данных'));
-              } else {
-                return ListView.builder(
-                  itemCount: 12,
-                  itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FullNewsScreen(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 16),
-                        child: Row(
+    return FutureBuilder<List<News>>(
+      future: News.fetchNews(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            final List<News> newsList = snapshot.data!;
+            return ListView.builder(
+              itemCount: newsList.length,
+              itemBuilder: (context, index) {
+                News news = newsList[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FullNewsScreen(
+                                imageUrl: news.imageUrl,
+                                title: news.title,
+                                summary: news.summary)));
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.only(left: 32, right: 32, bottom: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(7),
-                                child: Image.asset(snapshot.data!.imagePath,
-                                    scale: 0.9),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.network(
+                                    news.imageUrl,
+                                    fit: BoxFit.cover,
+                                    scale: 1,
+                                    errorBuilder: (context, url, error) =>
+                                        const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             Column(
@@ -63,9 +73,10 @@ class NewsTile extends StatelessWidget {
                                   child: SizedBox(
                                     width: 230,
                                     child: Text(
-                                      snapshot.data!.newsName,
+                                      news.title,
                                       style: const TextStyle(
-                                          fontSize: 18,),
+                                        fontSize: 18,
+                                      ),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                     ),
@@ -77,7 +88,7 @@ class NewsTile extends StatelessWidget {
                                   child: SizedBox(
                                     width: 250,
                                     child: Text(
-                                      snapshot.data!.newsDescription,
+                                      news.summary,
                                       style: const TextStyle(
                                           fontSize: 16, color: Colors.grey),
                                       overflow: TextOverflow.ellipsis,
@@ -90,11 +101,19 @@ class NewsTile extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
-                    );
-                  }),
+                      ],
+                    ),
+                  ),
                 );
-              }
-            }));
+              },
+            );
+          }
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 }
