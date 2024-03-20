@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_webant/view/components/news_tile.dart';
+import 'package:news_list/view/components/news_tile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,10 +13,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             //txt
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.35, vertical: 10),
-              child: const Text(
-                "Все новости",
-                style: TextStyle(fontSize: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.sizeOf(context).width * 0.35,
+                vertical: 10,
+              ),
+              child:  Text(
+                AppLocalizations.of(context)!.allNews,
+                style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
             ),

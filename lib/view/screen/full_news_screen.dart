@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:new_webant/model/news_model.dart';
-import 'package:new_webant/view/components/link_to_source_button.dart';
+import 'package:news_list/model/news_model.dart';
+import 'package:news_list/resource/app_colors.dart';
+import 'package:news_list/view/components/link_to_source_button.dart';
+
+import '../../generated/l10n.dart';
 
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
@@ -15,9 +18,15 @@ class FullNewsScreen extends StatelessWidget {
         future: News.fetchNewsById(id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           } else if (snapshot.hasError) {
-            return const Center(child: Text('Ошибка при загрузки данных'));
+            return Center(
+              child: Text(
+                AppLocalization.of(context).errorLoadingData,
+              ),
+            );
           } else {
             final News news = snapshot.data!;
             return SafeArea(
@@ -36,7 +45,7 @@ class FullNewsScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                             errorBuilder: (context, url, error) => const Icon(
                               Icons.error,
-                              color: Colors.red,
+                              color: AppColor.errorColor,
                               size: 50,
                             ),
                           ),
@@ -59,7 +68,7 @@ class FullNewsScreen extends StatelessWidget {
                       width: 380,
                       height: 1,
                       decoration: const BoxDecoration(
-                        color: Color.fromARGB(196, 196, 196, 196),
+                        color: AppColor.greyLine,
                       ),
                     ),
                     Padding(
@@ -68,7 +77,7 @@ class FullNewsScreen extends StatelessWidget {
                         news.summary,
                         style: const TextStyle(
                           fontSize: 16,
-                          color: Colors.grey,
+                          color: AppColor.summaryColor,
                         ),
                       ),
                     ),

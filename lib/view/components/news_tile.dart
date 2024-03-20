@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:new_webant/model/news_model.dart';
-import 'package:new_webant/view/screen/full_news_screen.dart';
+import 'package:news_list/model/news_model.dart';
+import 'package:news_list/view/screen/full_news_screen.dart';
+import 'package:news_list/resource/app_colors.dart';
+
+import '../../generated/l10n.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({
@@ -15,7 +18,7 @@ class NewsTile extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return Center(
-              child: Text('Error: ${snapshot.error}'),
+              child: Text(AppLocalization.of(context).errorSnapshot),
             );
           } else {
             final List<News> newsList = snapshot.data!;
@@ -26,11 +29,13 @@ class NewsTile extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FullNewsScreen(
-                                  id: news.id,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FullNewsScreen(
+                          id: news.id,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     padding: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
@@ -56,7 +61,7 @@ class NewsTile extends StatelessWidget {
                                     scale: 1,
                                     errorBuilder: (context, url, error) => const Icon(
                                       Icons.error,
-                                      color: Colors.red,
+                                      color: AppColor.errorColor,
                                       size: 50,
                                     ),
                                   ),
@@ -88,7 +93,7 @@ class NewsTile extends StatelessWidget {
                                       news.summary,
                                       style: const TextStyle(
                                         fontSize: 16,
-                                        color: Colors.grey,
+                                        color: AppColor.summaryColor,
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -108,7 +113,6 @@ class NewsTile extends StatelessWidget {
             );
           }
         }
-
         return const Center(
           child: CircularProgressIndicator(),
         );

@@ -9,13 +9,14 @@ class News {
   final String summary;
   final String publishedAt;
 
-  News(
-      {required this.id,
-      required this.title,
-      required this.siteUrl,
-      required this.imageUrl,
-      required this.summary,
-      required this.publishedAt});
+  News({
+    required this.id,
+    required this.title,
+    required this.siteUrl,
+    required this.imageUrl,
+    required this.summary,
+    required this.publishedAt,
+  });
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(

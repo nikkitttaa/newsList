@@ -1,0 +1,5 @@
+{
+  "goToSource": "Go to source",
+  "errorLoadingData": "Error loading data",
+  "errorSnapshot": "Error: ${snapshot.error}"
+}

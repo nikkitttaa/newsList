@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:news_list/generated/l10n.dart';
+import 'package:news_list/resource/app_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LinkToSourceButton extends StatelessWidget {
-  const LinkToSourceButton({super.key, required this.url});
+  const LinkToSourceButton({
+    super.key,
+    required this.url,
+  });
 
   final String url;
 
-  // lauchSite(String url) async {
-  //   if (await canLaunchUrl(Uri.parse(url))) {
-  //     await launchUrl(Uri.parse(url));
-  //   } else {
-  //     throw 'Не удалось открыть URL: $url';
-  //   }
-  // }
+  void launchSite(String url) async {
+    await launchUrl(Uri.parse(url));
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // lauchSite(url);
-
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const WebView()));
-      },
+      onTap: () => launchSite(url),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Padding(
@@ -52,15 +48,15 @@ class LinkToSourceButton extends StatelessWidget {
                     left: 19,
                   ),
                   child: Image.asset(
-                    'assets/images/vector.png',
+                    AppIcon.link,
                     color: Colors.black,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16),
+                 Padding(
+                  padding: const EdgeInsets.only(left: 16),
                   child: Text(
-                    'Перейти в источник',
-                    style: TextStyle(
+                    AppLocalization.of(context).goToSource,
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
