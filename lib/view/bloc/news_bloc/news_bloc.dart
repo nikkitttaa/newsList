@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../model/news_model.dart';
@@ -11,13 +13,18 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     on<FetchNewsEvent>(_fetchNews);
   }
 
-  _fetchNews(event, emit) {
-    NewsLoading();
+  FutureOr<void> _fetchNews(
+    FetchNewsEvent event,
+    Emitter<NewsState> emit,
+  ) async {
+    try {
+      emit(NewsLoading());
 
-    News.fetchNews().then((newsList) {
-      emit(NewsLoaded.new);
-    }).catchError((error) {
+      final news = await News.fetchNews();
+
+      emit(NewsLoaded(news));
+    } catch (_) {
       emit(NewsError());
-    });
+    }
   }
 }
