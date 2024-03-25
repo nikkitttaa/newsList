@@ -1,0 +1,5 @@
+{
+  "goToSource": "Перейти в источник",
+  "errorLoadingData": "Ошибка при загрузки данных",
+  "errorSnapshot": "Ошибка: ${snapshot.error}"
+}
