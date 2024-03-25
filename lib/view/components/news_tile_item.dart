@@ -9,8 +9,6 @@ class NewsTileItem extends StatelessWidget {
 
   final News news;
 
-
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
