@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../model/news_model.dart';
+import 'package:news_list/model/news_model.dart';
+import 'package:news_list/services/news_services.dart';
 
 part 'news_event.dart';
 
@@ -23,10 +23,10 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       currentPage = state.newsList.length ~/ 10;
 
       if (currentPage == 0) {
-        emit(state.copyWith(status: NewsStatus.loading));
+        emit(state.copyWith(status: NewsStatus.loading)); //не надежно. добавить bool первая или нет
       }
 
-      final news = await News.fetchNews(limit: 10, offset: currentPage * 10);
+      final news = await NewsServices.fetchNews(limit: 10, offset: currentPage * 10);
 
       emit(
         state.copyWith(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/view/components/news_tile.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class NewsListScreen extends StatelessWidget {
+  const NewsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,11 @@ class HomeScreen extends StatelessWidget {
                 vertical: 10,
               ),
               child: Text(
-                AppLocalizations.of(context)!.allNews,
+                AppLocalization.of(context).allNews,
                 style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
             ),
-
             //list
             const Expanded(child: NewsTile())
           ],

@@ -22,10 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allNews": MessageLookupByLibrary.simpleMessage("All news"),
+        "errorFullNews":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "errorLoadingData":
             MessageLookupByLibrary.simpleMessage("Error loading data"),
         "errorSnapshot":
             MessageLookupByLibrary.simpleMessage("Error: \${snapshot.error}"),
-        "goToSource": MessageLookupByLibrary.simpleMessage("Go to source")
+        "goToSource": MessageLookupByLibrary.simpleMessage("Go to source"),
+        "waitingDataLoad":
+            MessageLookupByLibrary.simpleMessage("Waiting for the data to load")
       };
 }

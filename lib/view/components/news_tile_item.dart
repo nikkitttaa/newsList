@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../model/news_model.dart';
-import '../../resource/app_colors.dart';
-import '../screen/full_news_screen.dart';
+import 'package:news_list/model/news_model.dart';
+import 'package:news_list/resource/app_colors.dart';
+import 'package:news_list/view/screen/full_news_screen.dart';
 
 class NewsTileItem extends StatelessWidget {
   const NewsTileItem({super.key, required this.news});

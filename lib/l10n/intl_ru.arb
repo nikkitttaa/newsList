@@ -1,5 +1,8 @@
 {
   "goToSource": "Перейти в источник",
   "errorLoadingData": "Ошибка при загрузки данных",
-  "errorSnapshot": "Ошибка: ${snapshot.error}"
+  "errorSnapshot": "Ошибка: ${snapshot.error}",
+  "allNews": "Все новости",
+  "errorFullNews": "Что-то пошло не так",
+  "waitingDataLoad": "Ожидание загрузки данных"
 }

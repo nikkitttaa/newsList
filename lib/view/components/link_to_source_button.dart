@@ -57,7 +57,7 @@ class LinkToSourceButton extends StatelessWidget {
                   child: Text(
                     AppLocalization.of(context).goToSource,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 16,// ТАК НЕ ДЕЛАТЬ вынести в константы стили
                     ),
                   ),
                 )

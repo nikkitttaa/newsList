@@ -79,6 +79,36 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `Все новости`
+  String get allNews {
+    return Intl.message(
+      'Все новости',
+      name: 'allNews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Что-то пошло не так`
+  String get errorFullNews {
+    return Intl.message(
+      'Что-то пошло не так',
+      name: 'errorFullNews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ожидание загрузки данных`
+  String get waitingDataLoad {
+    return Intl.message(
+      'Ожидание загрузки данных',
+      name: 'waitingDataLoad',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

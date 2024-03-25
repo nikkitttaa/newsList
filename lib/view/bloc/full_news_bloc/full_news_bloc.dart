@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../model/news_model.dart';
+import 'package:news_list/model/news_model.dart';
+import 'package:news_list/services/news_services.dart';
 
 part 'full_news_event.dart';
 
@@ -22,10 +22,10 @@ class FullNewsBloc extends Bloc<FullNewsEvent, FullNewsState> {
     try {
       emit(FullNewsLoading());
 
-      final newsById = await News.fetchNewsById(id);
+      final newsById = await NewsServices.fetchNewsById(id: id);
 
       emit(FullNewsLoaded(newsById));
-    } catch (_) {
+    }catch (_) {
       emit(FullNewsError());
     }
   }

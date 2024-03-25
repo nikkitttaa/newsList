@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/model/news_model.dart';
 import 'package:news_list/view/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/view/components/news_tile_item.dart';
-
-import '../../generated/l10n.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({
@@ -18,10 +17,11 @@ class NewsTile extends StatelessWidget {
       child: BlocBuilder<NewsBloc, NewsState>(
         builder: (context, state) {
           if (state.status == NewsStatus.initial) {
-            return const Center(
-              child: Text('Initial'),
+            return Center(
+              child: Text(AppLocalization.of(context).waitingDataLoad),
             );
           } else if (state.status == NewsStatus.loading) {
+            // state.status.isLoaded так надо
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -32,6 +32,7 @@ class NewsTile extends StatelessWidget {
           } else if (state.status == NewsStatus.loaded) {
             return NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
+                //func make
                 if (scrollNotification is ScrollEndNotification) {
                   if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
                     BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
@@ -46,16 +47,11 @@ class NewsTile extends StatelessWidget {
                     if (index < state.newsList.length) {
                       News news = state.newsList[index];
                       return NewsTileItem(news: news);
-                    } else {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Center(child: CircularProgressIndicator()),
-                      );
                     }
                   }),
             );
           } else {
-            return const Center(child: Text('Что то пошло не так :('));
+            return Center(child: Text(AppLocalization.of(context).errorFullNews));
           }
         },
       ),
