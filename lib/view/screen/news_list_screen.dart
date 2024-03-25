@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
                 horizontal: MediaQuery.sizeOf(context).width * 0.35,
                 vertical: 10,
               ),
-              child:  Text(
+              child: Text(
                 AppLocalizations.of(context)!.allNews,
                 style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,

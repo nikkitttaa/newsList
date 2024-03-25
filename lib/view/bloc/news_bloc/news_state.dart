@@ -1,15 +1,27 @@
 part of 'news_bloc.dart';
 
-sealed class NewsState {}
+enum NewsStatus { initial, loading, loaded, error }
 
-final class NewsInitial extends NewsState {}
+class NewsState {
+  const NewsState({
+    this.status = NewsStatus.initial,
+    this.newsList = const <News>[],
+    this.hasReachedMax = false,
+  });
 
-final class NewsLoading extends NewsState {}
-
-final class NewsLoaded extends NewsState {
+  final NewsStatus status;
   final List<News> newsList;
+  final bool hasReachedMax;
 
-  NewsLoaded(this.newsList);
+  NewsState copyWith({
+    NewsStatus? status,
+    List<News>? newsList,
+    bool? hasReachedMax,
+  }) {
+    return NewsState(
+      status: status ?? this.status,
+      newsList: newsList ?? this.newsList,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
+  }
 }
-
-final class NewsError extends NewsState {}

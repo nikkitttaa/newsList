@@ -29,8 +29,9 @@ class News {
     );
   }
 
-  static Future<List<News>> fetchNews() async {
-    var url = 'https://api.spaceflightnewsapi.net/v4/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a';
+  static Future<List<News>> fetchNews({required int limit, required int offset}) async {
+    var url =
+        'https://api.spaceflightnewsapi.net/v4/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a&limit=$limit&offset=$offset';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final responseList = json.decode(response.body)['results'] as List<dynamic>;

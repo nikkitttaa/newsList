@@ -9,7 +9,7 @@ part 'news_event.dart';
 part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  NewsBloc() : super(NewsInitial()) {
+  NewsBloc() : super(const NewsState()) {
     on<FetchNewsEvent>(_fetchNews);
   }
 
@@ -18,13 +18,24 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     Emitter<NewsState> emit,
   ) async {
     try {
-      emit(NewsLoading());
+      var currentPage = 0;
 
-      final news = await News.fetchNews();
+      currentPage = state.newsList.length ~/ 10;
 
-      emit(NewsLoaded(news));
+      if (currentPage == 0) {
+        emit(state.copyWith(status: NewsStatus.loading));
+      }
+
+      final news = await News.fetchNews(limit: 10, offset: currentPage * 10);
+
+      emit(
+        state.copyWith(
+          status: NewsStatus.loaded,
+          newsList: [...state.newsList, ...news],
+        ),
+      );
     } catch (_) {
-      emit(NewsError());
+      emit(state.copyWith(status: NewsStatus.error));
     }
   }
 }
