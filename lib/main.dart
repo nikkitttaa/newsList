@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: const Locale('ru'),
+      locale: AppLocalization.delegate.supportedLocales.first,
       theme: AppThemeData.mainTheme,
       debugShowCheckedModeBanner: false,
       home: const NewsListScreen(),

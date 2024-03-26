@@ -20,8 +20,7 @@ class NewsTile extends StatelessWidget {
             return Center(
               child: Text(AppLocalization.of(context).waitingDataLoad),
             );
-          } else if (state.status == NewsStatus.loading) {
-            // state.status.isLoaded так надо
+          } else if (state.status == NewsStatus.loading && state.isFirstLoad) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -29,19 +28,10 @@ class NewsTile extends StatelessWidget {
             return Center(
               child: Text(AppLocalization.of(context).errorLoadingData),
             );
-          } else if (state.status == NewsStatus.loaded) {
+          } else {
             state.isFirstLoad = false;
             return NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                //func make
-                if (scrollNotification is ScrollEndNotification) {
-                  if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
-                    BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
-                    return true;
-                  }
-                }
-                return true;
-              },
+              onNotification: (scrollNotification) => pagination(scrollNotification, context),
               child: ListView.builder(
                 itemCount: state.newsList.length + 1,
                 itemBuilder: (context, index) {
@@ -49,14 +39,23 @@ class NewsTile extends StatelessWidget {
                     News news = state.newsList[index];
                     return NewsTileItem(news: news);
                   }
+                  return null;
                 },
               ),
             );
-          } else {
-            return Center(child: Text(AppLocalization.of(context).errorFullNews));
           }
         },
       ),
     );
   }
+}
+
+pagination(scrollNotification, context) {
+  if (scrollNotification is ScrollEndNotification) {
+    if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
+      BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+      return true;
+    }
+  }
+  return true;
 }

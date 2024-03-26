@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/resource/app_colors.dart';
+import 'package:news_list/resource/app_theme.dart';
 import 'package:news_list/view/bloc/full_news_bloc/full_news_bloc.dart';
 import 'package:news_list/view/components/link_to_source_button.dart';
 
@@ -63,9 +64,7 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                         child: Text(
                           state.newsById.title,
-                          style: const TextStyle(
-                            fontSize: 24,
-                          ),
+                          style: AppThemeData.titleForFullNewsStyle,
                         ),
                       ),
                       Container(
@@ -82,10 +81,7 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                         child: Text(
                           state.newsById.summary,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColor.summaryColor,
-                          ),
+                          style: AppThemeData.summaryStyle,
                         ),
                       ),
                       LinkToSourceButton(

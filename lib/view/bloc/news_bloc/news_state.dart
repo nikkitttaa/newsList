@@ -15,8 +15,6 @@ class NewsState {
   final bool hasReachedMax;
   bool isFirstLoad;
 
-  // final NewsStatus isLoading = NewsStatus.loading;
-
   NewsState copyWith({
     NewsStatus? status,
     List<News>? newsList,

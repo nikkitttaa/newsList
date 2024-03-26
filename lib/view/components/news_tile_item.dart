@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/model/news_model.dart';
 import 'package:news_list/resource/app_colors.dart';
+import 'package:news_list/resource/app_theme.dart';
 import 'package:news_list/view/screen/full_news_screen.dart';
 
 class NewsTileItem extends StatelessWidget {
@@ -69,9 +70,7 @@ class NewsTileItem extends StatelessWidget {
                         width: 230,
                         child: Text(
                           news.title,
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
+                          style: AppThemeData.titleForNewsListStyle,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -86,10 +85,7 @@ class NewsTileItem extends StatelessWidget {
                         width: 250,
                         child: Text(
                           news.summary,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColor.summaryColor,
-                          ),
+                          style: AppThemeData.summaryStyle,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           softWrap: true,
