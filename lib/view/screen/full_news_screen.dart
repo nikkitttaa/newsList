@@ -36,7 +36,9 @@ class FullNewsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.sizeOf(context).width * 0.02,
+                        ),
                         child: SizedBox(
                           height: 235,
                           width: 380,
@@ -55,9 +57,9 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+                          vertical: MediaQuery.sizeOf(context).height * 0.015,
                         ),
                         child: Text(
                           state.newsById.title,
@@ -74,7 +76,10 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+                          vertical: MediaQuery.sizeOf(context).height * 0.015,
+                        ),
                         child: Text(
                           state.newsById.summary,
                           style: const TextStyle(

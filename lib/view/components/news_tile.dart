@@ -30,6 +30,7 @@ class NewsTile extends StatelessWidget {
               child: Text(AppLocalization.of(context).errorLoadingData),
             );
           } else if (state.status == NewsStatus.loaded) {
+            state.isFirstLoad = false;
             return NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 //func make
@@ -42,13 +43,14 @@ class NewsTile extends StatelessWidget {
                 return true;
               },
               child: ListView.builder(
-                  itemCount: state.newsList.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index < state.newsList.length) {
-                      News news = state.newsList[index];
-                      return NewsTileItem(news: news);
-                    }
-                  }),
+                itemCount: state.newsList.length + 1,
+                itemBuilder: (context, index) {
+                  if (index < state.newsList.length) {
+                    News news = state.newsList[index];
+                    return NewsTileItem(news: news);
+                  }
+                },
+              ),
             );
           } else {
             return Center(child: Text(AppLocalization.of(context).errorFullNews));

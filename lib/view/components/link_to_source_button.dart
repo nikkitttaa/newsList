@@ -22,9 +22,9 @@ class LinkToSourceButton extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 16,
-            left: 24,
+          padding: EdgeInsets.only(
+            top: MediaQuery.sizeOf(context).height * 0.02,
+            left: MediaQuery.sizeOf(context).width * 0.05,
           ),
           child: Container(
             height: 40,
@@ -44,20 +44,22 @@ class LinkToSourceButton extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 19,
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.sizeOf(context).width * 0.04,
                   ),
                   child: Image.asset(
                     AppIcon.link,
                     color: Colors.black,
                   ),
                 ),
-                 Padding(
-                  padding: const EdgeInsets.only(left: 16),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.sizeOf(context).width * 0.04,
+                  ),
                   child: Text(
                     AppLocalization.of(context).goToSource,
                     style: const TextStyle(
-                      fontSize: 16,// ТАК НЕ ДЕЛАТЬ вынести в константы стили
+                      fontSize: 16, // ТАК НЕ ДЕЛАТЬ вынести в константы стили
                     ),
                   ),
                 )

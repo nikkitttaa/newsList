@@ -9,7 +9,7 @@ part 'news_event.dart';
 part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  NewsBloc() : super(const NewsState()) {
+  NewsBloc() : super(NewsState()) {
     on<FetchNewsEvent>(_fetchNews);
   }
 
@@ -22,7 +22,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
       currentPage = state.newsList.length ~/ 10;
 
-      if (currentPage == 0) {
+      if (state.isFirstLoad == true) {
         emit(state.copyWith(status: NewsStatus.loading)); //не надежно. добавить bool первая или нет
       }
 

@@ -22,7 +22,11 @@ class NewsTileItem extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
+        padding: EdgeInsets.only(
+          left: MediaQuery.sizeOf(context).width * 0.065,
+          right: MediaQuery.sizeOf(context).width * 0.065,
+          bottom: MediaQuery.sizeOf(context).height * 0.025,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,7 +34,9 @@ class NewsTileItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                  padding: EdgeInsets.only(
+                    right: MediaQuery.sizeOf(context).width * 0.025,
+                  ),
                   child: Container(
                     height: 80,
                     width: 80,
@@ -56,7 +62,9 @@ class NewsTileItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 5),
+                      padding: EdgeInsets.only(
+                        left: MediaQuery.sizeOf(context).width * 0.01,
+                      ),
                       child: SizedBox(
                         width: 230,
                         child: Text(
@@ -70,7 +78,10 @@ class NewsTileItem extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 5, top: 4),
+                      padding: EdgeInsets.only(
+                        left: MediaQuery.sizeOf(context).width * 0.01,
+                        top: MediaQuery.sizeOf(context).width * 0.012,
+                      ),
                       child: SizedBox(
                         width: 250,
                         child: Text(
