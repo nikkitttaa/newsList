@@ -36,7 +36,7 @@ class NewsTile extends StatelessWidget {
                 itemCount: state.newsList.length + 1,
                 itemBuilder: (context, index) {
                   if (index < state.newsList.length) {
-                    News news = state.newsList[index];
+                    NewsModel news = state.newsList[index];
                     return NewsTileItem(news: news);
                   }
                   return null;

@@ -7,7 +7,7 @@ final class FullNewsInitial extends FullNewsState {}
 final class FullNewsLoading extends FullNewsState {}
 
 final class FullNewsLoaded extends FullNewsState {
-  final News newsById;
+  final NewsModel newsById;
 
   FullNewsLoaded(this.newsById);
 }
