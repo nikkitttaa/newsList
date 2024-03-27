@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/resource/app_icons.dart';
+import 'package:news_list/internal/dependencies/resource/app_icons.dart';
+import 'package:news_list/internal/dependencies/resource/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkToSourceButton extends StatelessWidget {
@@ -58,9 +59,7 @@ class LinkToSourceButton extends StatelessWidget {
                   ),
                   child: Text(
                     AppLocalization.of(context).goToSource,
-                    style: const TextStyle(
-                      fontSize: 16, // ТАК НЕ ДЕЛАТЬ вынести в константы стили
-                    ),
+                    style: AppThemeData.linkBtnStyle,
                   ),
                 )
               ],

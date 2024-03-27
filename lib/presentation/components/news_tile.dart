@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/model/news_model.dart';
-import 'package:news_list/view/bloc/news_bloc/news_bloc.dart';
-import 'package:news_list/view/components/news_tile_item.dart';
+import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
+import 'package:news_list/presentation/components/news_tile_item.dart';
+
 
 class NewsTile extends StatelessWidget {
   const NewsTile({
@@ -29,7 +30,6 @@ class NewsTile extends StatelessWidget {
               child: Text(AppLocalization.of(context).errorLoadingData),
             );
           } else {
-            state.isFirstLoad = false;
             return NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) => pagination(scrollNotification, context),
               child: ListView.builder(
@@ -48,14 +48,14 @@ class NewsTile extends StatelessWidget {
       ),
     );
   }
-}
 
-pagination(scrollNotification, context) {
-  if (scrollNotification is ScrollEndNotification) {
-    if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
-      BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
-      return true;
+  bool pagination(scrollNotification, context) {
+    if (scrollNotification is ScrollEndNotification) {
+      if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
+        BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+        return true;
+      }
     }
+    return true;
   }
-  return true;
 }

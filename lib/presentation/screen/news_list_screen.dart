@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/view/components/news_tile.dart';
+import 'package:news_list/presentation/components/news_tile.dart';
 
 class NewsListScreen extends StatelessWidget {
   const NewsListScreen({super.key});

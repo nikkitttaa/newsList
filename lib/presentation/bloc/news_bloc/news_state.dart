@@ -13,7 +13,7 @@ class NewsState {
   final NewsStatus status;
   final List<News> newsList;
   final bool hasReachedMax;
-  bool isFirstLoad;
+  final bool isFirstLoad;
 
   NewsState copyWith({
     NewsStatus? status,

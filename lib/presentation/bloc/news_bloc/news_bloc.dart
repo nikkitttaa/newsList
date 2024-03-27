@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_list/model/news_model.dart';
-import 'package:news_list/services/news_services.dart';
+import 'package:news_list/data/api/services/news_services.dart';
+import 'package:news_list/domain/model/news_model.dart';
 
 part 'news_event.dart';
 
@@ -21,7 +21,12 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
       currentPage = state.newsList.length ~/ 10;
 
-      emit(state.copyWith(status: NewsStatus.loading));
+      emit(
+        state.copyWith(
+          isFirstLoad: currentPage == 0,
+          status: NewsStatus.loading,
+        ),
+      );
 
       final news = await NewsServices.fetchNews(limit: 10, offset: currentPage * 10);
 

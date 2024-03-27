@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/resource/app_colors.dart';
-import 'package:news_list/resource/app_theme.dart';
-import 'package:news_list/view/bloc/full_news_bloc/full_news_bloc.dart';
-import 'package:news_list/view/components/link_to_source_button.dart';
+import 'package:news_list/internal/dependencies/resource/app_colors.dart';
+import 'package:news_list/internal/dependencies/resource/app_theme.dart';
+import 'package:news_list/presentation/bloc/full_news_bloc/full_news_bloc.dart';
+import 'package:news_list/presentation/components/link_to_source_button.dart';
+
 
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
@@ -17,7 +18,7 @@ class FullNewsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: BlocProvider<FullNewsBloc>(
-          create: (context) => FullNewsBloc(id)..add(FetchNewsByIdEvent(id)),
+          create: (context) => FullNewsBloc()..add(FetchNewsByIdEvent(id)),
           child: BlocBuilder<FullNewsBloc, FullNewsState>(
             builder: (context, state) {
               if (state is FullNewsInitial) {
