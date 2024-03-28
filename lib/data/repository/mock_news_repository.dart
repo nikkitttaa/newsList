@@ -7,15 +7,16 @@ class MockNewsRepository implements NewsRepository {
   @override
   Future<List<News>> fetchNews({required int limit, required int offset}) async {
     return [
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
-      News(id: 1, title: 'title', siteUrl: 'title', imageUrl: 'title', summary: 'title', publishedAt: 'sad'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
+      News(id: 1, title: 'title', imageUrl: 'title', summary: 'title', siteUrl: '1232'),
     ];
   }
 

@@ -17,9 +17,8 @@ class DataNewsRepository implements NewsRepository {
         id: e.id,
         title: e.title,
         imageUrl: e.imageUrl,
-        siteUrl: e.siteUrl,
         summary: e.summary,
-        publishedAt: e.publishedAt,
+        siteUrl: e.siteUrl,
       );
     }).toList();
   }
@@ -28,14 +27,12 @@ class DataNewsRepository implements NewsRepository {
   Future<News> fetchNewsById({required int id}) async {
     final news = await service.fetchNewsById(id: id);
 
-    final News newNews = News(
-        id: news.id,
-        title: news.title,
-        summary: news.summary,
-        imageUrl: news.imageUrl,
-        siteUrl: news.siteUrl,
-        publishedAt: news.publishedAt);
-
-    return newNews;
+    return News(
+      id: news.id,
+      title: news.title,
+      summary: news.summary,
+      imageUrl: news.imageUrl,
+      siteUrl: news.siteUrl,
+    );
   }
 }
