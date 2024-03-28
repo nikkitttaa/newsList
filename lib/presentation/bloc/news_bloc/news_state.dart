@@ -5,19 +5,19 @@ enum NewsStatus { initial, loading, loaded, error }
 class NewsState {
   NewsState({
     this.status = NewsStatus.initial,
-    this.newsList = const <NewsModel>[],
+    this.newsList = const <News>[],
     this.hasReachedMax = false,
     this.isFirstLoad = true,
   });
 
   final NewsStatus status;
-  final List<NewsModel> newsList;
+  final List<News> newsList;
   final bool hasReachedMax;
   final bool isFirstLoad;
 
   NewsState copyWith({
     NewsStatus? status,
-    List<NewsModel>? newsList,
+    List<News>? newsList,
     bool? hasReachedMax,
     bool? isFirstLoad,
   }) {

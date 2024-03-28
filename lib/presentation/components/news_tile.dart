@@ -5,7 +5,6 @@ import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/presentation/components/news_tile_item.dart';
 
-
 class NewsTile extends StatelessWidget {
   const NewsTile({
     Key? key,
@@ -36,8 +35,10 @@ class NewsTile extends StatelessWidget {
                 itemCount: state.newsList.length + 1,
                 itemBuilder: (context, index) {
                   if (index < state.newsList.length) {
-                    NewsModel news = state.newsList[index];
-                    return NewsTileItem(news: news);
+                    News news = state.newsList[index];
+                    return NewsTileItem(
+                      news: news,
+                    );
                   }
                   return null;
                 },

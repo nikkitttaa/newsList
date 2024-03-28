@@ -7,7 +7,7 @@ import 'package:news_list/presentation/screen/full_news_screen.dart';
 class NewsTileItem extends StatelessWidget {
   const NewsTileItem({super.key, required this.news});
 
-  final NewsModel news;
+  final News news;
 
   @override
   Widget build(BuildContext context) {

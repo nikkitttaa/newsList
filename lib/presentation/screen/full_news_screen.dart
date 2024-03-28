@@ -9,7 +9,6 @@ import 'package:news_list/presentation/components/link_to_source_button.dart';
 
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
-
   final int id;
 
   @override
@@ -18,7 +17,7 @@ class FullNewsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: BlocProvider<FullNewsBloc>(
-          create: (context) => FullNewsBloc()..add(FetchNewsByIdEvent(id)),
+          create: (context) => FullNewsBloc()..add(FetchNewsByIdEvent(id: id)),
           child: BlocBuilder<FullNewsBloc, FullNewsState>(
             builder: (context, state) {
               if (state is FullNewsInitial) {
