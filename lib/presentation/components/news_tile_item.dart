@@ -5,9 +5,10 @@ import 'package:news_list/internal/dependencies/resource/app_theme.dart';
 import 'package:news_list/presentation/screen/full_news_screen.dart';
 
 class NewsTileItem extends StatelessWidget {
-  const NewsTileItem({super.key, required this.news});
+  const NewsTileItem({super.key, required this.news, required this.description});
 
   final News news;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class NewsTileItem extends StatelessWidget {
                         news.imageUrl,
                         fit: BoxFit.cover,
                         scale: 1,
-                        errorBuilder: (context, url, error) => const Icon(
+                        errorBuilder: (_, __, ___) => const Icon(
                           Icons.error,
                           color: AppColor.errorColor,
                           size: 50,
@@ -84,7 +85,7 @@ class NewsTileItem extends StatelessWidget {
                       child: SizedBox(
                         width: 250,
                         child: Text(
-                          news.summary,
+                          description,
                           style: AppThemeData.summaryStyle,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,

@@ -35,9 +35,11 @@ class NewsTile extends StatelessWidget {
                 itemCount: state.newsList.length + 1,
                 itemBuilder: (context, index) {
                   if (index < state.newsList.length) {
-                    News news = state.newsList[index];
+                    final News news = state.newsList[index];
+                    final String description = news.summary == '' ? 'not found' : news.summary;
                     return NewsTileItem(
                       news: news,
+                      description: description,
                     );
                   }
                   return null;

@@ -1,4 +1,4 @@
-class NewsDto{
+class NewsDto {
   final int id;
   final String title;
   final String siteUrl;

@@ -6,9 +6,9 @@ import 'package:news_list/internal/dependencies/resource/app_theme.dart';
 import 'package:news_list/presentation/bloc/full_news_bloc/full_news_bloc.dart';
 import 'package:news_list/presentation/components/link_to_source_button.dart';
 
-
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
+
   final int id;
 
   @override
@@ -33,6 +33,7 @@ class FullNewsScreen extends StatelessWidget {
                   child: Text(AppLocalization.of(context).errorLoadingData),
                 );
               } else if (state is FullNewsLoaded) {
+                final String description = state.newsById.summary == '' ? 'not found' : state.newsById.summary;
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -68,7 +69,7 @@ class FullNewsScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 380,
+                        width: MediaQuery.sizeOf(context).width * 0.9,
                         height: 1,
                         decoration: const BoxDecoration(
                           color: AppColor.greyLine,
@@ -80,7 +81,7 @@ class FullNewsScreen extends StatelessWidget {
                           vertical: MediaQuery.sizeOf(context).height * 0.015,
                         ),
                         child: Text(
-                          state.newsById.summary,
+                          description,
                           style: AppThemeData.summaryStyle,
                         ),
                       ),

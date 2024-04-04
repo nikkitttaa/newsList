@@ -1,5 +1,3 @@
-
-
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
 
@@ -25,5 +23,4 @@ class MockNewsRepository implements NewsRepository {
     // TODO: implement fetchNewsById
     throw UnimplementedError();
   }
-
 }
