@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
@@ -8,12 +9,15 @@ import 'package:news_list/presentation/components/news_tile_item.dart';
 class NewsTile extends StatelessWidget {
   const NewsTile({
     Key? key,
+    required this.locator,
   }) : super(key: key);
+
+  final GetIt locator;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsBloc>(
-      create: (context) => NewsBloc()..add(FetchNewsEvent()),
+      create: (context) => NewsBloc(locator)..add(FetchNewsEvent()),
       child: BlocBuilder<NewsBloc, NewsState>(
         builder: (context, state) {
           if (state.status == NewsStatus.initial) {
@@ -40,6 +44,7 @@ class NewsTile extends StatelessWidget {
                     return NewsTileItem(
                       news: news,
                       description: description,
+                      locator: locator,
                     );
                   }
                   return null;

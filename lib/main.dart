@@ -3,21 +3,24 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_list/data/api/services/news_services.dart';
 import 'package:news_list/data/repository/data_news_repository.dart';
+import 'package:news_list/data/repository/mock_news_repository.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
 import 'package:news_list/internal/dependencies/resource/app_theme.dart';
 import 'package:news_list/presentation/screen/news_list_screen.dart';
 import 'generated/l10n.dart';
 
-GetIt locator = GetIt.instance;
-
 void main() {
-  runApp(const MyApp());
+  GetIt locator = GetIt.instance;
+
+  runApp(MyApp(locator: locator));
 
   locator.registerLazySingleton<NewsRepository>(() => DataNewsRepository(service: NewsServices()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.locator});
+
+  final GetIt locator;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class MyApp extends StatelessWidget {
       locale: AppLocalization.delegate.supportedLocales.first,
       theme: AppThemeData.mainTheme,
       debugShowCheckedModeBanner: false,
-      home: const NewsListScreen(),
+      home: NewsListScreen(locator: locator),
     );
   }
 }
