@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/presentation/components/news_tile.dart';
 
 class NewsListScreen extends StatelessWidget {
-  const NewsListScreen({super.key, required this.locator});
+  const NewsListScreen({super.key});
 
-  final GetIt locator;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,9 @@ class NewsListScreen extends StatelessWidget {
               ),
             ),
             //list
-            Expanded(child: NewsTile(locator: locator))
+            const Expanded(
+              child: NewsTile(),
+            )
           ],
         ),
       ),

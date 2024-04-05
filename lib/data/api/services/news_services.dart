@@ -1,29 +1,28 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:news_list/data/api/dto/news_dto.dart';
-import 'package:news_list/internal/dependencies/resource/app_constant.dart';
+import 'package:dio/dio.dart';
 
 class NewsServices {
+  NewsServices({required this.dio});
+
+  final Dio dio;
+
   Future<List<NewsDto>> fetchNews({required int limit, required int offset}) async {
-    var url = '${Constant.url}?launch=65896761-b6ca-4df3-9699-e077a360c52a&limit=$limit&offset=$offset';
-    final response = await http.get(Uri.parse(url));
+    var url = '/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a&limit=$limit&offset=$offset';
+    final Response response = await dio.get(url);
+
     if (response.statusCode == 200) {
-      final responseList = json.decode(response.body)['results'] as List<dynamic>;
+      final responseList = response.data['results'] as List<dynamic>;
 
-      function(response) {
-        return NewsDto.fromJson(response as Map<String, dynamic>);
-      }
-
-      return responseList.map(function).toList();
+      return responseList.map((response) => NewsDto.fromJson(response as Map<String, dynamic>)).toList();
     } else {
       throw Exception('Error');
     }
   }
 
   Future<NewsDto> fetchNewsById({required int id}) async {
-    final response = await http.get(Uri.parse('${Constant.url}$id/'));
+    final Response response = await dio.get('/articles/$id/');
     if (response.statusCode == 200) {
-      final responseList = json.decode(response.body) as Map<String, dynamic>;
+      final responseList = response.data as Map<String, dynamic>;
 
       var news = NewsDto.fromJson(responseList);
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
 
@@ -9,11 +8,11 @@ part 'news_event.dart';
 part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  NewsBloc(this.locator) : super(NewsState()) {
+  NewsBloc({required this.newsRepository}) : super(NewsState()) {
     on<FetchNewsEvent>(_fetchNews);
   }
 
-  final GetIt locator;
+  final NewsRepository newsRepository;
 
   FutureOr<void> _fetchNews(
     FetchNewsEvent event,
@@ -31,7 +30,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         ),
       );
 
-      final news = await locator<NewsRepository>().fetchNews(limit: 10, offset: currentPage * 10);
+      final news = await newsRepository.fetchNews(limit: 10, offset: currentPage * 10);
 
       emit(
         state.copyWith(
@@ -42,7 +41,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
           ],
         ),
       );
-    } catch (_) {
+    }catch (_) {
       emit(state.copyWith(status: NewsStatus.error));
     }
   }

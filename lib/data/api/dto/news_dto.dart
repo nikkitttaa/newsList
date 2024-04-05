@@ -7,7 +7,7 @@ class NewsDto {
 
   NewsDto.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        title = json['title'],
+        title  =json['title'],
         siteUrl = json['url'],
         imageUrl = json['image_url'],
         summary = json['summary'];
