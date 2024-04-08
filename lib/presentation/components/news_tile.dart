@@ -5,6 +5,7 @@ import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/injection/di.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/presentation/components/news_tile_item.dart';
+import 'package:news_list/resource/extension/scroll_notification_extension.dart';
 
 class NewsTile extends StatelessWidget {
   const NewsTile({
@@ -57,10 +58,7 @@ class NewsTile extends StatelessWidget {
 
   bool pagination(scrollNotification, context) {
     if (scrollNotification is ScrollEndNotification) {
-      // scrollNotification.hasReachedEnd
-      //extension on
-
-      if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
+      if (scrollNotification.hasReachedEnd) {
         BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
         return true;
       }
