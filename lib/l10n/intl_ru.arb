@@ -4,5 +4,8 @@
   "errorSnapshot": "Ошибка: ${snapshot.error}",
   "allNews": "Все новости",
   "errorFullNews": "Что-то пошло не так",
-  "waitingDataLoad": "Ожидание загрузки данных"
+  "waitingDataLoad": "Ожидание загрузки данных",
+  "search": "Поиск..",
+  "searchErrorNull": "Вы не ввели запрос. Введите запрос.",
+  "descriptionNotFound": "Не найдено"
 }

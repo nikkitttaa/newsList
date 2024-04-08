@@ -37,4 +37,24 @@ class NewsServices {
       throw Exception('Error');
     }
   }
+
+  Future<NewsDto> searchNewsByName({required String title}) async {
+    final Response response = await dio.get(
+      '/articles/',
+      queryParameters: {
+        'launch': '65896761-b6ca-4df3-9699-e077a360c52a',
+        'search': title,
+      },
+    );
+    if (response.statusCode == 200) {
+      final responseList = response.data as Map<String, dynamic>;
+
+      var news = NewsDto.fromJson(responseList);
+
+      return news;
+
+    } else {
+      throw Exception('Error');
+    }
+  }
 }

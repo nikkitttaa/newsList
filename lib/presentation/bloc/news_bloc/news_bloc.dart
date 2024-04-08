@@ -14,10 +14,9 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   final NewsRepository newsRepository;
 
-  FutureOr<void> _fetchNews(
-    FetchNewsEvent event,
-    Emitter<NewsState> emit,
-  ) async {
+
+  FutureOr<void> _fetchNews(FetchNewsEvent event,
+      Emitter<NewsState> emit,) async {
     try {
       var currentPage = 0;
 
@@ -41,7 +40,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
           ],
         ),
       );
-    }catch (_) {
+    } catch (_) {
       emit(state.copyWith(status: NewsStatus.error));
     }
   }

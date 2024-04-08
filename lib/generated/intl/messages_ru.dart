@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "allNews": MessageLookupByLibrary.simpleMessage("Все новости"),
+        "descriptionNotFound":
+            MessageLookupByLibrary.simpleMessage("Не найдено"),
         "errorFullNews":
             MessageLookupByLibrary.simpleMessage("Что-то пошло не так"),
         "errorLoadingData":
@@ -31,6 +33,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ошибка: \${snapshot.error}"),
         "goToSource":
             MessageLookupByLibrary.simpleMessage("Перейти в источник"),
+        "search": MessageLookupByLibrary.simpleMessage("Поиск.."),
+        "searchErrorNull": MessageLookupByLibrary.simpleMessage(
+            "Вы не ввели запрос. Введите запрос."),
         "waitingDataLoad":
             MessageLookupByLibrary.simpleMessage("Ожидание загрузки данных")
       };

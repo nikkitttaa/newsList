@@ -4,5 +4,8 @@
   "errorSnapshot": "Error: ${snapshot.error}",
   "allNews": "All news",
   "errorFullNews": "Something went wrong",
-  "waitingDataLoad": "Waiting for the data to load"
+  "waitingDataLoad": "Waiting for the data to load",
+  "search": "Search..",
+  "searchErrorNull": "You did not enter the request. Enter a request.",
+  "descriptionNotFound": "Not found"
 }

@@ -109,6 +109,36 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `Поиск..`
+  String get search {
+    return Intl.message(
+      'Поиск..',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы не ввели запрос. Введите запрос.`
+  String get searchErrorNull {
+    return Intl.message(
+      'Вы не ввели запрос. Введите запрос.',
+      name: 'searchErrorNull',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не найдено`
+  String get descriptionNotFound {
+    return Intl.message(
+      'Не найдено',
+      name: 'descriptionNotFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
