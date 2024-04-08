@@ -12,15 +12,17 @@ class DataNewsRepository implements NewsRepository {
   Future<List<News>> fetchNews({required int limit, required int offset}) async {
     final newsList = await service.fetchNews(limit: limit, offset: offset);
 
-    return newsList.map<News>((e) {
-      return News(
-        id: e.id,
-        title: e.title,
-        imageUrl: e.imageUrl,
-        summary: e.summary,
-        siteUrl: e.siteUrl,
-      );
-    }).toList();
+    return newsList.map<News>(
+      (e) {
+        return News(
+          id: e.id,
+          title: e.title,
+          imageUrl: e.imageUrl,
+          summary: e.summary,
+          siteUrl: e.siteUrl,
+        );
+      },
+    ).toList();
   }
 
   @override

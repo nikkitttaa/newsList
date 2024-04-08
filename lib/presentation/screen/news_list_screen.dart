@@ -5,14 +5,12 @@ import 'package:news_list/presentation/components/news_tile.dart';
 class NewsListScreen extends StatelessWidget {
   const NewsListScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            //txt
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.sizeOf(context).width * 0.35,
@@ -24,7 +22,6 @@ class NewsListScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            //list
             const Expanded(
               child: NewsTile(),
             )

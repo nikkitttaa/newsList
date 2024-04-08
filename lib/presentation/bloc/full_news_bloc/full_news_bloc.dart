@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
 
@@ -10,11 +9,11 @@ part 'full_news_state.dart';
 
 class FullNewsBloc extends Bloc<FullNewsEvent, FullNewsState> {
 
-  FullNewsBloc(this.locator) : super(FullNewsInitial()) {
+  FullNewsBloc(this.newsRepository) : super(FullNewsInitial()) {
     on<FetchNewsByIdEvent>(_fetchNewsById);
   }
 
-  final GetIt locator;
+  final NewsRepository newsRepository;
 
   FutureOr<void> _fetchNewsById(
     FetchNewsByIdEvent event,
@@ -22,7 +21,7 @@ class FullNewsBloc extends Bloc<FullNewsEvent, FullNewsState> {
   ) async {
     emit(FullNewsLoading());
 
-    final newsById = await locator<NewsRepository>().fetchNewsById(id: event.id);
+    final newsById = await newsRepository.fetchNewsById(id: event.id);
 
     emit(FullNewsLoaded(newsById));
   }

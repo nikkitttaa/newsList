@@ -11,7 +11,6 @@ class NewsTile extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsBloc>(
@@ -59,6 +58,9 @@ class NewsTile extends StatelessWidget {
 
   bool pagination(scrollNotification, context) {
     if (scrollNotification is ScrollEndNotification) {
+      // scrollNotification.hasReachedEnd
+      //extension on
+
       if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
         BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
         return true;

@@ -7,8 +7,14 @@ class NewsServices {
   final Dio dio;
 
   Future<List<NewsDto>> fetchNews({required int limit, required int offset}) async {
-    var url = '/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a&limit=$limit&offset=$offset';
-    final Response response = await dio.get(url);
+    final Response response = await dio.get(
+      '/articles/',
+      queryParameters: {
+        'launch': '65896761-b6ca-4df3-9699-e077a360c52a',
+        'limit': limit,
+        'offset': offset,
+      },
+    );
 
     if (response.statusCode == 200) {
       final responseList = response.data['results'] as List<dynamic>;

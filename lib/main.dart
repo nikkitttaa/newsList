@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
-import 'package:news_list/data/api/services/news_services.dart';
-import 'package:news_list/data/repository/data_news_repository.dart';
-import 'package:news_list/domain/repository/news_repository.dart';
 import 'package:news_list/injection/di.dart';
-import 'package:news_list/internal/dependencies/resource/app_theme.dart';
 import 'package:news_list/presentation/screen/news_list_screen.dart';
+import 'package:news_list/resource/app_theme.dart';
 import 'generated/l10n.dart';
 
 void main() {
-  runApp(MyApp(locator: locator));
+  runApp(const MyApp());
 
-  locator.registerLazySingleton<NewsRepository>(() => DataNewsRepository(service: NewsServices(dio: dio)));
+  initializeDependencies();
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.locator});
-
-  final GetIt locator;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
