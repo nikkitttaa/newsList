@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/presentation/screen/full_news_screen.dart';
 import 'package:news_list/resource/app_colors.dart';
@@ -10,12 +9,10 @@ class NewsTileItem extends StatelessWidget {
     super.key,
     required this.news,
     required this.description,
-    required this.locator,
   });
 
   final News news;
   final String description;
-  final GetIt locator;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,6 @@ class NewsTileItem extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => FullNewsScreen(
               id: news.id,
-              locator: locator(),
             ),
           ),
         );

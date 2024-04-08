@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:news_list/generated/l10n.dart';
+import 'package:news_list/injection/di.dart';
 import 'package:news_list/presentation/bloc/full_news_bloc/full_news_bloc.dart';
 import 'package:news_list/presentation/components/link_to_source_button.dart';
 import 'package:news_list/resource/app_colors.dart';
 import 'package:news_list/resource/app_theme.dart';
 
 class FullNewsScreen extends StatelessWidget {
-  const FullNewsScreen({super.key, required this.id, required this.locator});
+  const FullNewsScreen({super.key, required this.id});
 
   final int id;
-  final GetIt locator;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class FullNewsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: BlocProvider<FullNewsBloc>(
-          create: (context) => FullNewsBloc(locator())..add(FetchNewsByIdEvent(id: id)),
+          create: (context) => FullNewsBloc(newsRepository: locator())..add(FetchNewsByIdEvent(id: id)),
           child: BlocBuilder<FullNewsBloc, FullNewsState>(
             builder: (context, state) {
               if (state is FullNewsInitial) {

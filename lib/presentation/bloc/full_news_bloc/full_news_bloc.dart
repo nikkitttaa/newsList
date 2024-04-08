@@ -9,7 +9,7 @@ part 'full_news_state.dart';
 
 class FullNewsBloc extends Bloc<FullNewsEvent, FullNewsState> {
 
-  FullNewsBloc(this.newsRepository) : super(FullNewsInitial()) {
+  FullNewsBloc({required this.newsRepository}) : super(FullNewsInitial()) {
     on<FetchNewsByIdEvent>(_fetchNewsById);
   }
 

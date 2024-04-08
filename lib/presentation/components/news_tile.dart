@@ -43,7 +43,6 @@ class NewsTile extends StatelessWidget {
                     return NewsTileItem(
                       news: news,
                       description: description,
-                      locator: locator,
                     );
                   }
                   return null;
