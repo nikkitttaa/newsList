@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,9 +10,11 @@ import 'package:news_list/presentation/components/news_tile_item.dart';
 import 'package:news_list/resource/extension/scroll_notification_extension.dart';
 
 class NewsTile extends StatelessWidget {
-  const NewsTile({
+  NewsTile({
     Key? key,
   }) : super(key: key);
+
+  Timer? debounce;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,15 @@ class NewsTile extends StatelessWidget {
               ),
               child: CupertinoSearchTextField(
                 onChanged: (value) {
-                  if (value.length > 3) {
-                    context.read<NewsBloc>().add(SearchNewsByName(title: value.trim()));
-                  } else{
+                  if (value.length >= 3) {
+                    if (debounce?.isActive ?? false) debounce?.cancel();
+                    debounce = Timer(
+                      const Duration(milliseconds: 300),
+                      () {
+                        context.read<NewsBloc>().add(SearchNewsByName(title: value.trim()));
+                      },
+                    );
+                  } else {
                     context.read<NewsBloc>().add(FetchNewsEvent());
                   }
                 },
