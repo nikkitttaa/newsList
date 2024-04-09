@@ -15,6 +15,7 @@ class NewsTile extends StatelessWidget {
   }) : super(key: key);
 
   Timer? debounce;
+  String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,12 @@ class NewsTile extends StatelessWidget {
               child: CupertinoSearchTextField(
                 onChanged: (value) {
                   if (value.length >= 3) {
+                    title = value.trim();
                     if (debounce?.isActive ?? false) debounce?.cancel();
                     debounce = Timer(
                       const Duration(milliseconds: 300),
                       () {
-                        context.read<NewsBloc>().add(SearchNewsByName(title: value.trim()));
+                        context.read<NewsBloc>().add(SearchNewsByName(title: title!));
                       },
                     );
                   } else {
@@ -88,11 +90,14 @@ class NewsTile extends StatelessWidget {
   }
 
   bool pagination(scrollNotification, context) {
-    if (scrollNotification is ScrollEndNotification) {
-      if (scrollNotification.hasReachedEnd) {
-        BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
-        return true;
+    if(title == ''){
+      if (scrollNotification is ScrollEndNotification) {
+        if (scrollNotification.hasReachedEnd) {
+          BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+          return true;
+        }
       }
+      return true;
     }
     return true;
   }
