@@ -9,13 +9,31 @@ import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/presentation/components/news_tile_item.dart';
 import 'package:news_list/resource/extension/scroll_notification_extension.dart';
 
-class NewsTile extends StatelessWidget {
-  NewsTile({
+class NewsTile extends StatefulWidget {
+  const NewsTile({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<NewsTile> createState() => _NewsTileState();
+}
+
+class _NewsTileState extends State<NewsTile> {
   Timer? debounce;
-  String? title;
+
+  final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    searchController;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +50,18 @@ class NewsTile extends StatelessWidget {
                 vertical: MediaQuery.sizeOf(context).height * 0.015,
               ),
               child: CupertinoSearchTextField(
+                controller: searchController,
+                onSuffixTap: () {
+                  searchController.text = '';
+                  context.read<NewsBloc>().add(FetchNewsEvent());
+                },
                 onChanged: (value) {
                   if (value.length >= 3) {
-                    title = value.trim();
                     if (debounce?.isActive ?? false) debounce?.cancel();
                     debounce = Timer(
                       const Duration(milliseconds: 300),
                       () {
-                        context.read<NewsBloc>().add(SearchNewsByName(title: title!));
+                        context.read<NewsBloc>().add(SearchNewsByName(title: searchController.text));
                       },
                     );
                   } else {
@@ -90,14 +112,11 @@ class NewsTile extends StatelessWidget {
   }
 
   bool pagination(scrollNotification, context) {
-    if(title == ''){
-      if (scrollNotification is ScrollEndNotification) {
-        if (scrollNotification.hasReachedEnd) {
-          BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
-          return true;
-        }
+    if (scrollNotification is ScrollEndNotification && searchController.text == '') {
+      if (scrollNotification.hasReachedEnd) {
+        BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+        return true;
       }
-      return true;
     }
     return true;
   }
