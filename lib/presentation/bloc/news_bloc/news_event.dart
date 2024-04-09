@@ -4,4 +4,8 @@ abstract class NewsEvent {}
 
 class FetchNewsEvent extends NewsEvent {}
 
-class SearchNewsByName extends NewsEvent {}
+class SearchNewsByName extends NewsEvent {
+  final String title;
+
+  SearchNewsByName({required this.title});
+}

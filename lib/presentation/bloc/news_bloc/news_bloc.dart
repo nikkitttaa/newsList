@@ -10,13 +10,15 @@ part 'news_state.dart';
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsBloc({required this.newsRepository}) : super(NewsState()) {
     on<FetchNewsEvent>(_fetchNews);
+    on<SearchNewsByName>(_searchNews);
   }
 
   final NewsRepository newsRepository;
 
-
-  FutureOr<void> _fetchNews(FetchNewsEvent event,
-      Emitter<NewsState> emit,) async {
+  FutureOr<void> _fetchNews(
+    FetchNewsEvent event,
+    Emitter<NewsState> emit,
+  ) async {
     try {
       var currentPage = 0;
 
@@ -43,5 +45,30 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     } catch (_) {
       emit(state.copyWith(status: NewsStatus.error));
     }
+  }
+
+  FutureOr<void> _searchNews(
+    SearchNewsByName event,
+    Emitter<NewsState> emit,
+  ) async {
+    var currentPage = 0;
+
+    currentPage = state.newsList.length ~/ 10;
+
+    emit(
+      state.copyWith(
+        isFirstLoad: currentPage == 0,
+        status: NewsStatus.loading,
+      ),
+    );
+
+    final newsList = await newsRepository.searchNewsByName(title: event.title);
+
+    emit(
+      state.copyWith(
+        status: NewsStatus.loaded,
+        newsList: newsList,
+      ),
+    );
   }
 }

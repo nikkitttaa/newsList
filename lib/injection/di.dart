@@ -8,21 +8,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 final GetIt locator = GetIt.instance;
 
-// final Dio dio = Dio(
-//   BaseOptions(
-//     baseUrl: Constant.url,
-//   ),
-// )..interceptors.add(
-//     PrettyDioLogger(
-//       requestHeader: true,
-//       requestBody: true,
-//     ),
-//   );
-//
-// Future<void> initializeDependencies() async{
-//
-// }
-
 Future<void> initializeDependencies() async {
   locator.registerLazySingleton(
         () =>

@@ -37,4 +37,21 @@ class DataNewsRepository implements NewsRepository {
       siteUrl: news.siteUrl,
     );
   }
+
+  @override
+  Future<List<News>> searchNewsByName({required String title}) async {
+    final newsList = await service.searchNewsByName(title: title);
+
+    return newsList.map<News>(
+      (e) {
+        return News(
+          id: e.id,
+          title: e.title,
+          imageUrl: e.imageUrl,
+          summary: e.summary,
+          siteUrl: e.siteUrl,
+        );
+      },
+    ).toList();
+  }
 }

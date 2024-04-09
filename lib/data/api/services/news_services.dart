@@ -38,7 +38,7 @@ class NewsServices {
     }
   }
 
-  Future<NewsDto> searchNewsByName({required String title}) async {
+  Future<List<NewsDto>> searchNewsByName({required String title}) async {
     final Response response = await dio.get(
       '/articles/',
       queryParameters: {
@@ -47,12 +47,9 @@ class NewsServices {
       },
     );
     if (response.statusCode == 200) {
-      final responseList = response.data as Map<String, dynamic>;
+      final responseList = response.data['results'] as List<dynamic>;
 
-      var news = NewsDto.fromJson(responseList);
-
-      return news;
-
+      return responseList.map((response) => NewsDto.fromJson(response as Map<String, dynamic>)).toList();
     } else {
       throw Exception('Error');
     }

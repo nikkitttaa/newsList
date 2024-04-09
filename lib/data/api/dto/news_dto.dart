@@ -6,7 +6,9 @@ part 'news_dto.g.dart';
 class NewsDto {
   final int id;
   final String title;
+  @JsonKey(name: 'url')
   final String siteUrl;
+  @JsonKey(name: 'image_url')
   final String imageUrl;
   final String summary;
 
@@ -21,11 +23,4 @@ class NewsDto {
   factory NewsDto.fromJson(Map<String, dynamic> json) => _$NewsDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewsDtoToJson(this);
-
-  // NewsDto.fromJson(Map<String, dynamic> json)
-  //     : id = json['id'],
-  //       title  =json['title'],
-  //       siteUrl = json['url'],
-  //       imageUrl = json['image_url'],
-  //       summary = json['summary'];
 }

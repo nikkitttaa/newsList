@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/domain/model/news_model.dart';
@@ -14,46 +15,66 @@ class NewsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NewsBloc>(
+    return BlocProvider(
       create: (context) => NewsBloc(
         newsRepository: locator(),
       )..add(FetchNewsEvent()),
-      child: BlocBuilder<NewsBloc, NewsState>(
-        builder: (context, state) {
-          if (state.status == NewsStatus.initial) {
-            return Center(
-              child: Text(AppLocalization.of(context).waitingDataLoad),
-            );
-          } else if (state.status == NewsStatus.loading && state.isFirstLoad) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state.status == NewsStatus.error) {
-            return Center(
-              child: Text(AppLocalization.of(context).errorLoadingData),
-            );
-          } else {
-            return NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) => pagination(scrollNotification, context),
-              child: ListView.builder(
-                itemCount: state.newsList.length + 1,
-                itemBuilder: (context, index) {
-                  if (index < state.newsList.length) {
-                    final News news = state.newsList[index];
-                    final String description =
-                        news.summary == '' ? AppLocalization.of(context).descriptionNotFound : news.summary;
-                    return NewsTileItem(
-                      news: news,
-                      description: description,
-                    );
+      child: Builder(builder: (context) {
+        return Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.sizeOf(context).width * 0.05,
+                vertical: MediaQuery.sizeOf(context).height * 0.015,
+              ),
+              child: CupertinoSearchTextField(
+                onChanged: (value) {
+                  if (value.length > 3) {
+                    context.read<NewsBloc>().add(SearchNewsByName(title: value.trim()));
+                  } else{
+                    context.read<NewsBloc>().add(FetchNewsEvent());
                   }
-                  return null;
                 },
               ),
-            );
-          }
-        },
-      ),
+            ),
+            Expanded(
+              child: BlocBuilder<NewsBloc, NewsState>(
+                builder: (context, state) {
+                  if (state.status == NewsStatus.initial) {
+                    return Center(
+                      child: Text(AppLocalization.of(context).waitingDataLoad),
+                    );
+                  } else if (state.status == NewsStatus.loading && state.isFirstLoad) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.status == NewsStatus.error) {
+                    return Center(
+                      child: Text(AppLocalization.of(context).errorLoadingData),
+                    );
+                  } else {
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: (scrollNotification) => pagination(scrollNotification, context),
+                      child: ListView.builder(
+                        itemCount: state.newsList.length,
+                        itemBuilder: (context, index) {
+                          final News news = state.newsList[index];
+                          final String description =
+                              news.summary == '' ? AppLocalization.of(context).descriptionNotFound : news.summary;
+                          return NewsTileItem(
+                            news: news,
+                            description: description,
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 
