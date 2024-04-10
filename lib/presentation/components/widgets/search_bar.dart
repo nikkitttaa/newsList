@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
-import 'package:news_list/resource/debounce.dart';
+import 'package:news_list/helper/debounce.dart';
 
+// Сделать виджет переиспользуемым
 class SearchNewsBar extends StatefulWidget {
   const SearchNewsBar({super.key, required this.searchController});
 

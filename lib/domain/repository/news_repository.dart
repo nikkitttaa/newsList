@@ -5,5 +5,5 @@ abstract class NewsRepository {
 
   Future<News> fetchNewsById({required int id});
 
-  Future<List<News>> searchNewsByName({required String title});
+  Future<List<News>> searchNewsByName({required String title, required int limit, required int offset});
 }

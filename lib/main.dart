@@ -5,10 +5,10 @@ import 'package:news_list/presentation/screen/news_list_screen.dart';
 import 'package:news_list/resource/app_theme.dart';
 import 'generated/l10n.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await initializeDependencies();
 
-  initializeDependencies();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -30,6 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-

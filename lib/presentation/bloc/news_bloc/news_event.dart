@@ -9,3 +9,9 @@ class SearchNewsByName extends NewsEvent {
 
   SearchNewsByName({required this.title});
 }
+
+class PaginationSearchNews extends NewsEvent {
+  final String title;
+
+  PaginationSearchNews({required this.title});
+}

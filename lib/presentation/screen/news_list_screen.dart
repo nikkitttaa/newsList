@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/presentation/components/news_tile.dart';
+import 'package:news_list/presentation/components/news_screen.dart';
 
 class NewsListScreen extends StatelessWidget {
   const NewsListScreen({super.key});
@@ -13,7 +13,7 @@ class NewsListScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(AppLocalization.of(context).allNews),
       ),
-      body: const NewsTile(),
+      body: const NewsScreen(),
     );
   }
 }

@@ -39,8 +39,8 @@ class DataNewsRepository implements NewsRepository {
   }
 
   @override
-  Future<List<News>> searchNewsByName({required String title}) async {
-    final newsList = await service.searchNewsByName(title: title);
+  Future<List<News>> searchNewsByName({required String title, required int limit, required int offset}) async {
+    final newsList = await service.searchNewsByName(title: title, limit: limit, offset: offset);
 
     return newsList.map<News>(
       (e) {

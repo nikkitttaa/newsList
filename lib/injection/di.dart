@@ -10,13 +10,11 @@ final GetIt locator = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   locator.registerLazySingleton(
-        () =>
-    Dio(
+    () => Dio(
       BaseOptions(
         baseUrl: Constant.url,
       ),
-    )
-      ..interceptors.add(
+    )..interceptors.add(
         PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
@@ -24,6 +22,11 @@ Future<void> initializeDependencies() async {
       ),
   );
 
-  locator.registerLazySingleton<NewsRepository>(() => DataNewsRepository(service: NewsServices(dio: locator(),)));
+  locator.registerLazySingleton<NewsRepository>(
+    () => DataNewsRepository(
+      service: NewsServices(
+        dio: locator(),
+      ),
+    ),
+  );
 }
-

@@ -38,11 +38,13 @@ class NewsServices {
     }
   }
 
-  Future<List<NewsDto>> searchNewsByName({required String title}) async {
+  Future<List<NewsDto>> searchNewsByName({required String title, required int limit, required int offset}) async {
     final Response response = await dio.get(
       '/articles/',
       queryParameters: {
         'launch': '65896761-b6ca-4df3-9699-e077a360c52a',
+        'limit': limit,
+        'offset': offset,
         'search': title,
       },
     );

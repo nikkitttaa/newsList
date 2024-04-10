@@ -25,7 +25,7 @@ class MockNewsRepository implements NewsRepository {
   }
 
   @override
-  Future<List<News>> searchNewsByName({required String title}) {
+  Future<List<News>> searchNewsByName({required String title, required int limit, required int offset}) {
     // TODO: implement searchNewsByName
     throw UnimplementedError();
   }
