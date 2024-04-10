@@ -17,10 +17,7 @@ class NewsTile extends StatefulWidget {
   State<NewsTile> createState() => _NewsTileState();
 }
 
-
-
 class _NewsTileState extends State<NewsTile> {
-
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -44,7 +41,9 @@ class _NewsTileState extends State<NewsTile> {
       child: Builder(builder: (context) {
         return Column(
           children: [
-            SearchNewsBar(searchController: searchController,),
+            SearchNewsBar(
+              searchController: searchController,
+            ),
             Expanded(
               child: BlocBuilder<NewsBloc, NewsState>(
                 builder: (context, state) {
@@ -87,7 +86,7 @@ class _NewsTileState extends State<NewsTile> {
   }
 
   bool pagination(scrollNotification, context) {
-    if (scrollNotification is ScrollEndNotification && searchController.text == '') {
+    if (scrollNotification is ScrollEndNotification) {
       if (scrollNotification.hasReachedEnd) {
         BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
         return true;

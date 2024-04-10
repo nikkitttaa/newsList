@@ -1,8 +1,7 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
-
+import 'package:news_list/resource/debounce.dart';
 
 class SearchNewsBar extends StatefulWidget {
   const SearchNewsBar({super.key, required this.searchController});
@@ -14,7 +13,7 @@ class SearchNewsBar extends StatefulWidget {
 }
 
 class _SearchNewsBarState extends State<SearchNewsBar> {
-  Timer? debounce;
+  final _debouncer = Debouncer(milliseconds: 300);
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +25,14 @@ class _SearchNewsBarState extends State<SearchNewsBar> {
       child: CupertinoSearchTextField(
         controller: widget.searchController,
         onSuffixTap: () {
-          widget.searchController.text = '';
+          widget.searchController.clear();
           context.read<NewsBloc>().add(FetchNewsEvent());
         },
         onChanged: (value) {
           if (value.length >= 3) {
-            if (debounce?.isActive ?? false) debounce?.cancel();
-            debounce = Timer(
-              const Duration(milliseconds: 300),
-              () {
-                context.read<NewsBloc>().add(SearchNewsByName(title: widget.searchController.text));
-              },
-            );
-          } else {
-            context.read<NewsBloc>().add(FetchNewsEvent());
+            _debouncer.run(() {
+              context.read<NewsBloc>().add(SearchNewsByName(title: widget.searchController.text));
+            });
           }
         },
       ),
