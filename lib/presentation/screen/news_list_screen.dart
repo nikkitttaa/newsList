@@ -13,7 +13,7 @@ class NewsListScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(AppLocalization.of(context).allNews),
       ),
-      body: NewsTile(),
+      body: const NewsTile(),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/domain/model/news_model.dart';
@@ -7,6 +5,7 @@ import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/injection/di.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/presentation/components/news_tile_item.dart';
+import 'package:news_list/presentation/components/widgets/search_bar.dart';
 import 'package:news_list/resource/extension/scroll_notification_extension.dart';
 
 class NewsTile extends StatefulWidget {
@@ -18,8 +17,9 @@ class NewsTile extends StatefulWidget {
   State<NewsTile> createState() => _NewsTileState();
 }
 
+
+
 class _NewsTileState extends State<NewsTile> {
-  Timer? debounce;
 
   final TextEditingController searchController = TextEditingController();
 
@@ -44,32 +44,7 @@ class _NewsTileState extends State<NewsTile> {
       child: Builder(builder: (context) {
         return Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.sizeOf(context).width * 0.05,
-                vertical: MediaQuery.sizeOf(context).height * 0.015,
-              ),
-              child: CupertinoSearchTextField(
-                controller: searchController,
-                onSuffixTap: () {
-                  searchController.text = '';
-                  context.read<NewsBloc>().add(FetchNewsEvent());
-                },
-                onChanged: (value) {
-                  if (value.length >= 3) {
-                    if (debounce?.isActive ?? false) debounce?.cancel();
-                    debounce = Timer(
-                      const Duration(milliseconds: 300),
-                      () {
-                        context.read<NewsBloc>().add(SearchNewsByName(title: searchController.text));
-                      },
-                    );
-                  } else {
-                    context.read<NewsBloc>().add(FetchNewsEvent());
-                  }
-                },
-              ),
-            ),
+            SearchNewsBar(searchController: searchController,),
             Expanded(
               child: BlocBuilder<NewsBloc, NewsState>(
                 builder: (context, state) {
