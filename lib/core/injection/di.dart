@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:news_list/core/resource/app_constant.dart';
 import 'package:news_list/data/api/services/news_services.dart';
 import 'package:news_list/data/repository/data_news_repository.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
-import 'package:news_list/resource/app_constant.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 final GetIt locator = GetIt.instance;

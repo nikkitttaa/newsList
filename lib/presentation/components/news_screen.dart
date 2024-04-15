@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_list/core/extension/scroll_notification_extension.dart';
+import 'package:news_list/core/injection/di.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/generated/l10n.dart';
-import 'package:news_list/helper/extension/scroll_notification_extension.dart';
-import 'package:news_list/injection/di.dart';
 import 'package:news_list/presentation/bloc/news_bloc/news_bloc.dart';
 import 'package:news_list/presentation/components/news_tile_item.dart';
 import 'package:news_list/presentation/components/widgets/search_bar.dart';

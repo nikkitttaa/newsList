@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:news_list/injection/di.dart';
+import 'package:news_list/core/injection/di.dart';
+import 'package:news_list/core/resource/app_theme.dart';
 import 'package:news_list/presentation/routing/router.dart';
-import 'package:news_list/resource/app_theme.dart';
 import 'generated/l10n.dart';
 
 void main() async {

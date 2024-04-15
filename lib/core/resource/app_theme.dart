@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_list/resource/app_colors.dart';
+import 'package:news_list/core/resource/app_colors.dart';
 
 class AppThemeData {
   static final ThemeData mainTheme = ThemeData(fontFamily: 'Poppins');
