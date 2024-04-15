@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:news_list/data/api/services/news_services.dart';
+import 'package:news_list/data/api/services/api.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/domain/repository/news_repository.dart';
 
 class DataNewsRepository implements NewsRepository {
-  final NewsServices service;
+  final ApiServices service;
 
   DataNewsRepository({required this.service});
 
