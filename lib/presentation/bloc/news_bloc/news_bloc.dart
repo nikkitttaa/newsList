@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/domain/model/news_model.dart';
 import 'package:news_list/domain/repository/news_repository.dart';

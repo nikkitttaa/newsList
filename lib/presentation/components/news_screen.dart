@@ -1,3 +1,5 @@
+// ignore_for_file: void_checks
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/domain/model/news_model.dart';
