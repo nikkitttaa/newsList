@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:news_list/domain/model/news_model.dart';
+import 'package:news_list/presentation/routing/router.dart';
 import 'package:news_list/presentation/screen/full_news_screen.dart';
 import 'package:news_list/resource/app_colors.dart';
 import 'package:news_list/resource/app_theme.dart';
@@ -18,14 +20,7 @@ class NewsTileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FullNewsScreen(
-              id: news.id,
-            ),
-          ),
-        );
+        AutoRouter.of(context).push(FullNewsRoute(id: news.id));
       },
       child: Container(
         padding: EdgeInsets.only(

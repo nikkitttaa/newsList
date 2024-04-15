@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_list/generated/l10n.dart';
@@ -7,6 +8,7 @@ import 'package:news_list/presentation/components/widgets/link_to_source_button.
 import 'package:news_list/resource/app_colors.dart';
 import 'package:news_list/resource/app_theme.dart';
 
+@RoutePage()
 class FullNewsScreen extends StatelessWidget {
   const FullNewsScreen({super.key, required this.id});
 

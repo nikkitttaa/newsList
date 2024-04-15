@@ -21,16 +21,21 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "allNews": MessageLookupByLibrary.simpleMessage("All news"),
-        "descriptionNotFound": MessageLookupByLibrary.simpleMessage("Not found"),
-        "errorFullNews": MessageLookupByLibrary.simpleMessage("Something went wrong"),
-        "errorLoadingData": MessageLookupByLibrary.simpleMessage("Error loading data"),
-        "errorSnapshot": MessageLookupByLibrary.simpleMessage("Error: \${snapshot.error}"),
+        "descriptionNotFound":
+            MessageLookupByLibrary.simpleMessage("Not found"),
+        "errorFullNews":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "errorLoadingData":
+            MessageLookupByLibrary.simpleMessage("Error loading data"),
+        "errorSnapshot":
+            MessageLookupByLibrary.simpleMessage("Error: \${snapshot.error}"),
         "goToSource": MessageLookupByLibrary.simpleMessage("Go to source"),
         "search": MessageLookupByLibrary.simpleMessage("Search.."),
-        "searchErrorNull": MessageLookupByLibrary.simpleMessage("You did not enter the request. Enter a request."),
-        "waitingDataLoad": MessageLookupByLibrary.simpleMessage("Waiting for the data to load")
+        "searchErrorNull": MessageLookupByLibrary.simpleMessage(
+            "You did not enter the request. Enter a request."),
+        "waitingDataLoad":
+            MessageLookupByLibrary.simpleMessage("Waiting for the data to load")
       };
 }

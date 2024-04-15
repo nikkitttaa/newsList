@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:news_list/generated/l10n.dart';
 import 'package:news_list/presentation/components/news_screen.dart';
 
+@RoutePage()
 class NewsListScreen extends StatelessWidget {
   const NewsListScreen({super.key});
 

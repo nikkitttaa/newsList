@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:news_list/injection/di.dart';
-import 'package:news_list/presentation/screen/news_list_screen.dart';
+import 'package:news_list/presentation/routing/router.dart';
 import 'package:news_list/resource/app_theme.dart';
 import 'generated/l10n.dart';
 
@@ -11,12 +11,21 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       localizationsDelegates: const [
         AppLocalization.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -26,7 +35,7 @@ class MyApp extends StatelessWidget {
       locale: AppLocalization.delegate.supportedLocales.first,
       theme: AppThemeData.mainTheme,
       debugShowCheckedModeBanner: false,
-      home: const NewsListScreen(),
+      routerConfig: _appRouter.config(),
     );
   }
 }
