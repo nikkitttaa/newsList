@@ -9,23 +9,33 @@ part 'api.g.dart';
 abstract class ApiServices {
   factory ApiServices(Dio dio) = _ApiServices;
 
-
-
   @GET('/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a')
-  Future<List<NewsDto>> fetchNews({
+  Future<PaginationWrapper<NewsDto>> fetchNews({
     @Query('limit') required int limit,
     @Query('offset') required int offset,
   });
 
-  @GET('/articles/')
+  @GET('/articles/{id}')
   Future<NewsDto> fetchNewsById({
-    @Query('id') required int id,
+    @Path('id') required int id,
   });
 
   @GET('/articles/?launch=65896761-b6ca-4df3-9699-e077a360c52a')
-  Future<List<NewsDto>> searchNewsByName({
+  Future<PaginationWrapper<NewsDto>> searchNewsByName({
     @Query('limit') required int limit,
     @Query('offset') required int offset,
     @Query('search') required String title,
   });
+}
+
+class PaginationWrapper<T> {
+  final List<T> result;
+
+  PaginationWrapper({required this.result});
+
+  factory PaginationWrapper.fromJson(Map<String, dynamic> json, T Function(dynamic) fromJson) {
+    return PaginationWrapper(
+      result: (json['results'] as List<dynamic>).map((item) => fromJson(item)).toList(),
+    );
+  }
 }

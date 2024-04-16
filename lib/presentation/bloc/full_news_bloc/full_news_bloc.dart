@@ -19,11 +19,15 @@ class FullNewsBloc extends Bloc<FullNewsEvent, FullNewsState> {
     FetchNewsByIdEvent event,
     Emitter<FullNewsState> emit,
   ) async {
-    // try/catch
-    emit(FullNewsLoading());
+    try{
+      emit(FullNewsLoading());
 
-    final newsById = await newsRepository.fetchNewsById(id: event.id);
+      final newsById = await newsRepository.fetchNewsById(id: event.id);
 
-    emit(FullNewsLoaded(newsById));
+      emit(FullNewsLoaded(newsById));
+    }catch(error){
+      emit(FullNewsError());
+      print(error);
+    }
   }
 }

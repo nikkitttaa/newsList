@@ -21,7 +21,7 @@ class _ApiServices implements ApiServices {
   String? baseUrl;
 
   @override
-  Future<List<NewsDto>> fetchNews({
+  Future<PaginationWrapper<NewsDto>> fetchNews({
     required int limit,
     required int offset,
   }) async {
@@ -32,8 +32,8 @@ class _ApiServices implements ApiServices {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<NewsDto>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PaginationWrapper<NewsDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -49,16 +49,17 @@ class _ApiServices implements ApiServices {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => NewsDto.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = PaginationWrapper<NewsDto>.fromJson(
+      _result.data!,
+      (json) => NewsDto.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
   Future<NewsDto> fetchNewsById({required int id}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': id};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result =
@@ -69,7 +70,7 @@ class _ApiServices implements ApiServices {
     )
             .compose(
               _dio.options,
-              '/articles/',
+              '/articles/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -83,7 +84,7 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<List<NewsDto>> searchNewsByName({
+  Future<PaginationWrapper<NewsDto>> searchNewsByName({
     required int limit,
     required int offset,
     required String title,
@@ -96,8 +97,8 @@ class _ApiServices implements ApiServices {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<NewsDto>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PaginationWrapper<NewsDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -113,9 +114,10 @@ class _ApiServices implements ApiServices {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => NewsDto.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = PaginationWrapper<NewsDto>.fromJson(
+      _result.data!,
+      (json) => NewsDto.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
